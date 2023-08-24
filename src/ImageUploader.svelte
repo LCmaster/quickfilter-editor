@@ -8,11 +8,14 @@
     const data = fileReader.result
       .toString()
       .replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
+
+    console.log(data.slice(0, 32));
     dispatch("edit", data);
   };
 
   function submitImageToEdit(el) {
     if (el.target.files.length) {
+      console.log(el.target.files[0]);
       fileReader.readAsDataURL(el.target.files[0]);
     }
   }

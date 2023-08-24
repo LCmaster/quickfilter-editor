@@ -1,8 +1,13 @@
 <script>
-  export let editor;
-  export let image;
+  import { grayscale } from "../wasm/pkg/wasm";
+  export let image = null;
 
-  console.log(image);
+  let result;
+  $: result = grayscale(image);
 </script>
 
-<p>Editor</p>
+<div class="flex justify-center">
+  {#if result}
+    <img src={result} alt="result after edition" />
+  {/if}
+</div>

@@ -10,11 +10,15 @@
 <main>
   {#await init()}
     <AppLoader />
-  {:then editor}
+  {:then _}
+    <ImageUploader
+      on:edit={(ev) => {
+        console.log("Time to edit!");
+        imageToEdit = ev.detail;
+      }}
+    />
     {#if imageToEdit}
-      <ImageEditor {editor} image={imageToEdit} />
-    {:else}
-      <ImageUploader on:edit={(ev) => (imageToEdit = ev.detail)} />
+      <ImageEditor bind:image={imageToEdit} />
     {/if}
   {/await}
 </main>
