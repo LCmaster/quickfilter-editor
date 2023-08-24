@@ -1,8 +1,20 @@
 <script>
-  import init, { greet } from "../wasm/pkg/wasm";
-  init().then(() => greet());
+  import init from "../wasm/pkg/wasm";
+  import AppLoader from "./AppLoader.svelte";
+  import ImageEditor from "./ImageEditor.svelte";
+  import ImageUploader from "./ImageUploader.svelte";
+
+  let imageToEdit;
 </script>
 
 <main>
-  <h1>Hello World!</h1>
+  {#await init()}
+    <AppLoader />
+  {:then editor}
+    {#if imageToEdit}
+      <ImageEditor {editor} image={imageToEdit} />
+    {:else}
+      <ImageUploader on:edit={(ev) => (imageToEdit = ev.detail)} />
+    {/if}
+  {/await}
 </main>

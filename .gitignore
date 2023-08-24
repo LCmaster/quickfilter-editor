@@ -29,7 +29,6 @@ package-lock.json
 **/*.rs.bk
 Cargo.lock
 bin/
-pkg/
 wasm-pack.log
 .appveyor.yml
 .travis.yml
